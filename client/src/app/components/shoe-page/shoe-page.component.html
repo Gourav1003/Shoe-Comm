@@ -1,0 +1,20 @@
+<p>shoe-page works!</p>
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6">
+        <img
+          [src]="product.image_url"
+          alt="Product Image"
+          class="img-fluid image"
+        />
+      </div>
+      <div class="col-lg-6">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.description }}</p>
+        <p><strong>Price:</strong> {{ product.price }}</p>
+  
+        <button class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
+      </div>
+    </div>
+  </div>
