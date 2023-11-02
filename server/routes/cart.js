@@ -1,7 +1,7 @@
 const express = require("express");
 
 const Cart = require("../models/cart");
-// const Product = require("../model/product");
+const Product = require("../models/product");
 const auth = require("../auth/user");
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.post("/products", async (req, res) => {
 
   let cart;
 
-  console.log(req.body.productId);
+  // console.log(req.body);
 
   cart = await Cart.findOne({ userId: req.id });
   if (!cart) {
@@ -22,7 +22,7 @@ router.post("/products", async (req, res) => {
       },
       userId: req.id,
     };
-    console.log(cartstatus);
+    // console.log(cartstatus);
     cart = new Cart(cartstatus);
     await cart.save();
     res.status(200).send({ msg: "Item added to cart" });

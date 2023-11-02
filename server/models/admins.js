@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const bcrypt = require("bcryptjs");
 
+require("dotenv").config();
+
 const { urlencoded } = require("express");
 
 const adminSchema = new mongoose.Schema(
@@ -70,7 +72,7 @@ adminSchema.methods.getPublicProfile = function () {
   return adminObject;
 };
 adminSchema.statics.findByCredentials = async (email, password) => {
-  const admin = await User.findOne({ email });
+  const admin = await Admin.findOne({ email });
   if (!admin) {
     throw new Error("UnaBle to find admin");
   }
@@ -83,7 +85,7 @@ adminSchema.statics.findByCredentials = async (email, password) => {
 
 adminSchema.methods.generateAuthToken = async function () {
   const admin = this;
-  const token = jwt.sign({ _id: admin._id.toString() }, "thisismytoken",{
+  const token = jwt.sign({ _id: admin._id.toString() }, process.env.SECRET_KEY2,{
     expiresIn:"5h"
   });
   admin.tokens = admin.tokens.concat({ token });
@@ -101,6 +103,6 @@ adminSchema.pre("save", async function (next) {
   next();
 });
 
-const Admin = mongoose.model("User", adminSchema);
+const Admin = mongoose.model("Admin", adminSchema);
 
 module.exports = Admin;

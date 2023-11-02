@@ -11,3 +11,8 @@ export const selectIsLogin = createSelector(
   selectMyState,
   (state) => state.islogin
 );
+
+export const selectIsAdmin = createSelector(
+  selectMyState,
+  (state) => state.isAdmin
+);

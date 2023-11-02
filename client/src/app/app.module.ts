@@ -21,6 +21,9 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { AppRoutingModule } from './router/app-router.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShoePageComponent } from './components/shoe-page/shoe-page.component';
+import { AuthorizationInterceptor } from './router/auth.interceptor';
+import { AddAdminComponent } from './components/add-admin/add-admin.component';
+import { UpdateProductComponent } from './components/update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { ShoePageComponent } from './components/shoe-page/shoe-page.component';
     AdminPageComponent,
     ShoeDetailComponent,
     AdminLoginComponent,
-    ShoePageComponent
+    ShoePageComponent,
+    AddAdminComponent,
+    UpdateProductComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,13 @@ import { ShoePageComponent } from './components/shoe-page/shoe-page.component';
     EffectsModule.forRoot([MyEffects]),
     
   ],
-  providers: [],
+  providers: [
+    {
+    provide:HTTP_INTERCEPTORS,
+      useClass:AuthorizationInterceptor,
+      multi:true
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

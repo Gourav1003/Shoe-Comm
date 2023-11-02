@@ -1,1 +1,9 @@
 <p>admin-page works!</p>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-12 product" *ngFor="let product of products">
+        <app-shoe-detail [product]="product"></app-shoe-detail>
+      </div>
+    </div>
+  </div>

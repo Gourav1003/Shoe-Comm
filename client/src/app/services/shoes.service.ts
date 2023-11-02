@@ -16,6 +16,10 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
+  getAllProducts() : any {
+    return this.http.get(this.baseUrl);
+  }
+
   fetchProducts(): Observable<any[]> {
     this.products$ = this.http.get<any[]>(this.baseUrl).pipe(
       catchError((error) => {
@@ -58,6 +62,8 @@ export class ProductService {
     if (this.products$) {
       this.products$.subscribe((data: any) => {
         this.products = data;
+        console.log(data);
+        
       });
 
       const myproduct = this.products.find((product: { _id: any; }) => product._id == id);

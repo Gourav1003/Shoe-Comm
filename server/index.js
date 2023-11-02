@@ -13,7 +13,7 @@ app.use(express.json());
 app.use("/users", require("./routes/users"));
 app.use("/product", require("./routes/product"));
 app.use("/cart", require("./routes/cart"));
-app.use("/admin", require("./routes/admins"));
+app.use("/admins",require("./routes/admin"))
 
 const PORT = 3000;
 

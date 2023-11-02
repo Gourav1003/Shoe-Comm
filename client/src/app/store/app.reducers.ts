@@ -3,10 +3,12 @@ import * as MyActions from './app.actions';
 
 export interface MyState {
   islogin: boolean;
+  isAdmin: boolean;
 }
 
 export const initialState: MyState = {
-  islogin: false
+  islogin: false,
+  isAdmin: false
 };
 
 export const myReducer = createReducer(
@@ -18,7 +20,16 @@ export const myReducer = createReducer(
   on(MyActions.logout, (state) => {
     console.log('called2');
     return { ...state, islogin: false };
-  })
+  }),
+  on(MyActions.adminLogin, (state) => {
+    console.log('called3');
+    return { ...state, isAdmin: true };
+  }),
+  on(MyActions.adminLogout, (state) => {
+    console.log('called4');
+    return { ...state, isAdmin: false };
+  }),
+
 );
 
 // export function reducer(

@@ -6,9 +6,9 @@ const router = express.Router();
 
 router.get("/allProducts", async (req, res) => {
   try {
-    const products = await Product.find();
-
-    res.status(200).send(products);
+    const product = await Product.find();
+    // console.log(product);
+    res.status(200).send(product);
   } catch (e) {
     res.status(400).send(e);
   }
@@ -18,12 +18,14 @@ router.get("/product/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const products = await Product.findOne({ _id: id });
-    console.log(products);
+    // console.log(products);
 
     res.status(200).send(products);
   } catch (e) {
     res.status(400).send(e);
   }
 });
+
+
 
 module.exports = router;

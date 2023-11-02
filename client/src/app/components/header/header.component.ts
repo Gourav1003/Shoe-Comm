@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectIsLogin } from '../../store/app.selector';
+import { selectIsAdmin, selectIsLogin } from '../../store/app.selector';
 import { take } from 'rxjs/operators';
 import * as MyActions from '../../store/app.actions';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,6 +17,9 @@ export class HeaderComponent implements OnInit {
   isLoggedIn$: Observable<Boolean>;
   isLoggedIn: Boolean = false;
 
+  isAdmin$: Observable<Boolean>;
+  isAdmin: Boolean=false;
+
   constructor(
     private store: Store,
     private authService: AuthService,
@@ -26,6 +29,12 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn$.subscribe((res) => {
       console.log(res);
       this.isLoggedIn = res;
+    });
+
+    this.isAdmin$ = store.select(selectIsAdmin);
+    this.isAdmin$.subscribe((res) =>{
+      console.log(res);
+      this.isAdmin = res;
     })
   }
   ngOnInit() {
@@ -42,13 +51,22 @@ export class HeaderComponent implements OnInit {
 
   }
   login() {
-    this.store.dispatch(MyActions.login());
+    // this.store.dispatch(MyActions.login());
+    // this.store.dispatch(MyActions.adminLogin());
 
     this.router.navigate(['/login']);
   }
   logout() {
     this.authService.logout();
     this.store.dispatch(MyActions.logout());
+    this.store.dispatch(MyActions.adminLogout());
     this.router.navigate(['/']);
+  }
+
+  adminlogin() {
+    // this.store.dispatch(MyActions.login());
+    // this.store.dispatch(MyActions.adminLogin());
+
+    this.router.navigate(['/adminlogin']);
   }
 }

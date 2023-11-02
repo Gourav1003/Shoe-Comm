@@ -1,5 +1,3 @@
-<p>shoe-page works!</p>
-
 <div class="container mt-5">
     <div class="row">
       <div class="col-lg-6">
@@ -12,9 +10,14 @@
       <div class="col-lg-6">
         <h2>{{ product.title }}</h2>
         <p>{{ product.description }}</p>
+        <p>Sizes : {{ product.sizes }}</p>
+        <p>Colours : {{ product.colour }}</p>
+
         <p><strong>Price:</strong> {{ product.price }}</p>
   
-        <button class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
+        <button *ngIf="isLoggedIn && !isAdmin" class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
+        <button *ngIf="isLoggedIn && isAdmin" class="btn btn-primary" (click)="update(product._id)">Edit</button>
+        <button *ngIf="isLoggedIn && isAdmin" class="btn btn-primary" (click)="delete1(product._id)">Delete</button>
       </div>
     </div>
   </div>
